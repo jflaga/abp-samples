@@ -82,5 +82,9 @@ public class TodoAppDbContext :
         {
             b.ToTable("TodoItems");
         });
+        //builder.Entity<TodoSubItem>(b =>
+        //{
+        //    b.ToTable("TodoSubItems");
+        //});
     }
 }

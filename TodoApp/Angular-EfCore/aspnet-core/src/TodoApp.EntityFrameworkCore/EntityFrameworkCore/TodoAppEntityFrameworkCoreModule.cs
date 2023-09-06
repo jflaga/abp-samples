@@ -50,5 +50,6 @@ public class TodoAppEntityFrameworkCoreModule : AbpModule
             options.UseSqlServer();
         });
 
+        context.Services.AddScoped<ITodoItemRepository, TodoItemRepository>();
     }
 }

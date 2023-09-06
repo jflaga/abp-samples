@@ -8,7 +8,8 @@ namespace TodoApp
     public interface ITodoAppService : IApplicationService
     {
         Task<List<TodoItemDto>> GetListAsync();
-        Task<TodoItemDto> CreateAsync(string text);
+        Task<TodoItemDto> CreateAsync(TodoItemCreationDto dto);
+        Task<TodoItemDto> UpdateAsync(TodoItemDto dto);
         Task DeleteAsync(Guid id);
     }
 }
