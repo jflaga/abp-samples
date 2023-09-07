@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Account;
+﻿using AutoMapper.EquivalencyExpression;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -25,6 +26,10 @@ public class TodoAppApplicationModule : AbpModule
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
+            options.Configurators.Add(context =>
+            {
+                context.MapperConfiguration.AddCollectionMappers();
+            });
             options.AddMaps<TodoAppApplicationModule>();
         });
     }

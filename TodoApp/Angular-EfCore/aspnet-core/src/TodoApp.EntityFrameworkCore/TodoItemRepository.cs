@@ -40,7 +40,7 @@ namespace TodoApp
 
         public async Task<TodoItem> UpdateAsync(TodoItem item)
         {
-            return await UpdateAsync(item, autoSave: true);
+            return await base.UpdateAsync(item);
         }
     }
 }

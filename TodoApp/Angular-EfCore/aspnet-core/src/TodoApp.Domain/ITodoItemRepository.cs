@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace TodoApp
 {
-    public interface ITodoItemRepository : IBasicRepository<TodoItem, Guid>
+    public interface ITodoItemRepository
     {
         Task<List<TodoItem>> GetAllAsync();
         Task<TodoItem> GetByIdAsync(Guid id);

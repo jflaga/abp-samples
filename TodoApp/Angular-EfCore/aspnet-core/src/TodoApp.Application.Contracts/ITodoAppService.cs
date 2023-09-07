@@ -9,7 +9,7 @@ namespace TodoApp
     {
         Task<List<TodoItemDto>> GetListAsync();
         Task<TodoItemDto> CreateAsync(TodoItemCreationDto dto);
-        Task<TodoItemDto> UpdateAsync(TodoItemDto dto);
+        Task<TodoItemDto> UpdateAsync(TodoItemUpdateDto dto);
         Task DeleteAsync(Guid id);
     }
 }

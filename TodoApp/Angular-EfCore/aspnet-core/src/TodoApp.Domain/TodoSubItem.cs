@@ -9,7 +9,7 @@ namespace TodoApp
 {
     public class TodoSubItem : Entity<Guid>
     {
-        protected TodoSubItem() { }
+        protected TodoSubItem() { /* for EF use */ }
         public TodoSubItem(Guid Id)
             : base(Id) { }
 

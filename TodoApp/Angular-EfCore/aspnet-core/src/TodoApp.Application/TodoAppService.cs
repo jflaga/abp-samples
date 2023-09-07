@@ -19,12 +19,13 @@ namespace TodoApp
         // TODO: Implement the methods here...
         public async Task<List<TodoItemDto>> GetListAsync()
         {
-            var items = await _todoItemRepository.GetListAsync();
+            var items = await _todoItemRepository.GetAllAsync();
             return items
                 .Select(item => new TodoItemDto
                 {
                     Id = item.Id,
-                    Text = item.Text
+                    Text = item.Text,
+                    SubItems = ObjectMapper.Map<List<TodoSubItem>, List<TodoSubItemDto>>(item.SubItems.ToList())
                 }).ToList();
         }
 
@@ -48,18 +49,21 @@ namespace TodoApp
             };
         }
 
-        public async Task<TodoItemDto> UpdateAsync(TodoItemDto dto)
+        public async Task<TodoItemDto> UpdateAsync(TodoItemUpdateDto dto)
         {
             try
             {
-                var todo = ObjectMapper.Map<TodoItemDto, TodoItem>(dto);
+                var todoItem = await _todoItemRepository.GetByIdAsync(dto.Id);
+                ObjectMapper.Map(dto, todoItem);
 
-                var todoItem = await _todoItemRepository.UpdateAsync(todo);
+                var updatedTodoItem = await _todoItemRepository.UpdateAsync(todoItem);
+                await CurrentUnitOfWork.SaveChangesAsync();
 
                 return new TodoItemDto
                 {
-                    Id = todoItem.Id,
-                    Text = todoItem.Text
+                    Id = updatedTodoItem.Id,
+                    Text = updatedTodoItem.Text,
+                    SubItems = ObjectMapper.Map<List<TodoSubItem>, List<TodoSubItemDto>>(updatedTodoItem.SubItems.ToList())
                 };
             }
             catch (Exception ex)

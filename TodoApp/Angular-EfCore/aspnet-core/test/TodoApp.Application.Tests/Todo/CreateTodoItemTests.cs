@@ -39,6 +39,7 @@ public class CreateTodoItemTests : TodoAppApplicationTestBase
         result.Id.ShouldNotBe(Guid.Empty);
         result.Text.ShouldBe("Todo item 1");
         result.SubItems.Count().ShouldBe(2);
-        // TODO: more asserts
+        result.SubItems.ShouldContain(x => x.Text == "subitem 1");
+        result.SubItems.ShouldContain(x => x.Text == "subitem 2");
     }
 }
